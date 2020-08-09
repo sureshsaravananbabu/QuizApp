@@ -1,0 +1,87 @@
+{% extends 'Home.html' %}
+{% load multifor %}
+<html>
+    <head>
+        <style>
+            .alert.green {
+         color: green;
+        }
+        
+        .alert.red {
+         color: red;
+        }
+            </style>
+    </head>
+<body>
+<div style='transform: scale(0.65); position: relative; top: -50px;'>
+{% block body %}
+        <div class="row">
+            <div class="col-md-1"></div>	
+            <div class="col-md-5 col-sm-7 col-xs-24">
+            </div>
+            <div class="col-md-1"></div>	
+            <div class="col-md-16"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<form  method="POST" action="/quiz/" class="post-form">
+{% csrf_token %} 
+<h1><b>{{Title}}</b></h1>
+<input type="hidden" id="Title" name="Title" value="{{Title}}">	
+    {% for question in  Quiz; number in number %}
+    <table>
+                <tr><td><h1>{{number}}.</h1></td><td><h1>{{question.Question.questions}}</h1></td></tr>
+            </table>
+    <hr/>
+    <div id='block-1' style='padding: 10px;'>
+     <label for='option-1' style=' padding: 5px; font-size: 2.5rem;'>
+        <input type='radio' name= {{question.q_id}} value="{{question.Question.choice_1}}" id="{{question.Question.correct_answer}}" style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />{{question.Question.choice_1}}</label>
+        <span id='result-1'></span>
+    </div>
+    <hr/>
+    
+    <div id='block-2' style='padding: 10px;'>
+    <label for='option-2' style=' padding: 5px; font-size: 2.5rem;'>
+        <input type='radio' name={{question.q_id}} value="{{question.Question.choice_2}}" id="{{question.Question.correct_answer}}" style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' /> 				
+        {{question.Question.choice_2}}</label>
+        <span id='result-2'></span>
+    </div>	
+    <hr/>
+     
+    <div id='block-3' style='padding: 10px;'>
+    <label for='option-3' style=' padding: 5px; font-size: 2.5rem;'>
+        <input type='radio' name={{question.q_id}} value="{{question.Question.choice_3}}" id="{{question.Question.correct_answer}}" style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' /> 				
+        {{question.Question.choice_3}}</label>
+        <span id='result-3'></span>
+    </div>
+    <hr/>
+     
+    <div id='block-4' style='padding: 10px;'>
+        <label for='option-4' style=' padding: 5px; font-size: 2.5rem;'>
+         <input type='radio' name={{question.q_id}} value="{{question.Question.choice_4}}" id="{{question.Question.correct_answer}}" style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' /> 				
+         {{question.Question.choice_4}}</label>
+        <span id='result-4'></span>
+    </div>
+    <hr/>
+    {% endfor %}
+    <centre><input class='button'  type ="submit" style='width: 100px; height: 40px; border-radius: 3px; background-color: lightblue; font-weight: 700;'></button></centre>
+</form>
+<script>
+    $(document).ready(function(){
+        for(i=1;i<11;i++){
+            $('input[name=' + i + ']').change(function(){
+                if($(this).prop("checked") == true) {
+                    if($(this).val() === $(this).prop("id")){
+                        $(this).parent().append('<span class="alert green">&#10004 Correct Answer</span>');
+                    } else {
+                        $(this).parent().append('<span class="alert red">&#10006 Wrong Answer</span>');
+                    }
+                }
+            });
+        }
+    });
+
+</script>
+</div>
+</div>
+{% endblock body %}
+</body>
+</html>

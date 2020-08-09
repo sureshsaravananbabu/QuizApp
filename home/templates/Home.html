@@ -1,0 +1,94 @@
+{% load static %}
+{% load multifor %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            .alert.green {
+         color: green;
+        }
+        
+        .alert.red {
+         color: red;
+        }
+            .line{
+            width: 112px;
+            height: 47px;
+            border-bottom: 1px solid black;
+            position: absolute;
+            }
+            input[type=text]{
+              padding: 15px;
+              margin: 5px 0 22px 0;
+              display: inline-block;
+              border: none;
+              background: #f1f1f1;
+            }
+            html {zoom:80%;}
+            </style>
+    
+        
+        <meta charset="utf-8">
+        <title>School Quiz</title>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/jquery.lightbox.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/templatemo_style.css' %}" rel="stylesheet" />
+        </head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-md-push-1 col-sm-6">
+                <a href="/" id="templatemo_logo"><h3>School Quiz</h3></a>
+            </div>
+            <div class="col-md-3 hidden-xs"></div>
+            <div class="col-xs-3 col-xs-offset-20 visible-xs">
+                <a href="#" id="mobile_menu"><span class="glyphicon glyphicon-align-justify"></span></a>
+            </div>
+            <div class="col-xs-24 visible-xs" id="mobile_menu_list">
+                <ul>
+                    <li><a href="/create/">Create Quiz</a></li>
+                </ul>
+            </div>
+            <div class="col-md-16 col-sm-18 hidden-xs" id="templatemo-nav-bar">
+                <ul class="nav navbar-right">
+                    <li><a href="/create/">Create Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="templatemo_about">
+    <div class="container">
+        <div class="row">
+            <h1>About  School Quiz</h1>
+        </div>
+        {% block body %}
+        {% for a in home %}
+        <div class="row">
+            <div class="col-md-1"></div>	
+            <div class="col-md-5 col-sm-7 col-xs-24">
+                <img src="{% static 'images/templatemo_image_1.jpg' %}" alt="image 1"/>
+            </div>
+            <div class="col-md-1"></div>	
+            <div class="col-md-16">
+                <h3>{{a.0}}</h3>
+                <p>{{a.1}}</p>
+                <a href="/quiz/{{a.0}}/" class="btn btn-default">Take Quiz</a>
+            </div>
+        </div><!-- end of row -->
+        {% endfor %}
+        {% endblock body %}
+        <div class="clear"></div>
+    </div> 
+</section><!-- end of templatemo_about -->
+    <div class="solidline"></div>
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.scrollto.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.lightbox.min.js' %}"></script>
+<script src="{% static 'js/templatemo_script.js' %}"></script>
+</body>
+</html>

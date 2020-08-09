@@ -1,0 +1,63 @@
+{% extends 'Home.html' %}
+{% load multifor %}
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div style='transform: scale(0.65); position: relative; top: -50px;'>
+        {% block body %}
+        <div class="row">
+            <h1>About  School Quiz</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>	
+            <div class="col-md-5 col-sm-7 col-xs-24">
+            </div>
+            <div class="col-md-1"></div>	
+            <div class="col-md-16"></div>
+        <table>
+        <tr><td><h2>Title :</h2></td><td><h2>{{Title}}</h2></td></tr>
+        <tr><td><h2>Total No of Question :</h2></td><td><h2>10</h2></td></tr>
+        <tr><td><h2>Number of Question Answer :</h2></td><td><h2>{{Answered}}</h2></td></tr>
+        <tr><td><h2>Number of Question Answered Correctly:</h2></td><td><h2>{{correct}}</h2></td></tr>
+        <tr><td><h2>Number of Question Unanswered:</h2></td><td><h2>{{Unanswer}}</h2></td></tr>
+        <tr><td><h2>STATUS :</h2></td>
+        {% if correct > 5 %}
+        <td><h2  style="color:green;">PASS</h2></td>
+        {% else %}
+        <td><h2  style="color:red"><b>FAIL</b></h2></td>
+        {% endif %}
+        </tr>
+        </table>
+        <div class="solidline"></div>
+            <input type="hidden" id="Title" name="Title" value="{{Title}}">	
+                {% for question in  Quiz; number in number;Your_Answered in Your_answer %}
+                <table>
+                <tr><td><h2>{{number}}.</h2></td><td><h2>{{question.Question.questions}}</h2></td></tr>
+            </table>
+                {% if Your_Answered  == 'Not Answered' %}
+                <div id='block-1' style='padding: 10px;'>
+                    <div style=' padding: 5px; font-size: 2.5rem;'> Your Answer:Not Answered</div>
+                       <span id='result-1'></span>
+                   </div>
+                   <hr/>
+                {% else %}
+                <div id='block-1' style='padding: 10px;'>
+                 <div style=' padding: 5px; font-size: 2.5rem;'> Your Answer:{{Your_Answered}}</div>
+                    <span id='result-1'></span>
+                </div>
+                <hr/>
+                {% endif %}
+                <div id='block-2' style='padding: 10px;'>
+                    <div style=' padding: 5px; font-size: 2.5rem;'>Correct Answer:{{question.Question.correct_answer}}</div>
+                    <span id='result-2'></span>
+                </div>	
+                <div class="solidline"></div>
+                {% endfor %}
+                </div>
+            </div>
+                {% endblock body %}
+            </div>
+    </body>
+</html>

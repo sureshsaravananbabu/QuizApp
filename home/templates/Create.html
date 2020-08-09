@@ -1,0 +1,72 @@
+{% extends 'Home.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.line{
+width: 112px;
+height: 47px;
+border-bottom: 1px solid black;
+position: absolute;
+}
+input[type=text]{
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+</style>
+</head>
+<body>
+{% block body %}
+<div class="row">
+  <div class="col-md-1"></div>	
+  <div class="col-md-5 col-sm-7 col-xs-24">
+  </div>
+  <div class="col-md-1"></div>	
+  <div class="col-md-16">
+<form method="POST"  action="/create/">
+  {% csrf_token %} 
+    <table>
+    <tr><td></td><td><h1>Create Quiz</h1></td></tr>
+    <tr><td><b>Title</b></td><td>{{form.Title}}</td><td>{{error}}</td></tr>
+    <tr><td><b>Description:</b></td><td><textarea rows="5" cols="60" name="Description"   wrap="hard"></textarea></td></tr>
+  {% for i in number %}
+  <tr></tr>
+	<tr>
+	<td><b>Question {{i}}:</b></td><td><textarea rows="5" cols="60" name="Question{{i}}" wrap="hard"></textarea><br/></td>
+	</tr>
+	<tr>
+	<td><b>Option 1:</b></td><td><input type="text" placeholder="Enter Option" name="choice1{{i}}" id="choice1" required><br/></td> 
+	</tr>
+	<tr>
+    <td><b>Option 2:</b></td><td><input type="text" placeholder="Enter Option" name="choice2{{i}}" id="choice2" required><br/></td>
+	</tr>
+	<tr>
+    <td><b>Option 3:</b></td><td><input type="text" placeholder="Enter Option" name="choice3{{i}}" id="choice3" required><br/></td>
+	</tr>
+	<tr>
+    <td><b>Option 4:</b></td><td><input type="text" placeholder="Enter Option" name="choice4{{i}}" id="choice4" required><br/></td> 
+  </tr>
+  <tr>
+  <td><b>Answer:</b></td><td><input type="text" placeholder="Enter Answer" name="Answer{{i}}" id="Answer{{i}}" required><br/></td> 
+  </tr>
+  <tr> <td><div class="solidline"></div></td><td><div class="solidline"></div></td><td><div class="solidline"></div></td>
+  </tr>
+  {% endfor %}
+	</table>
+    <button type="submit" class="registerbtn">Register</button>
+</form>
+</div>
+</div><!-- end of row -->
+{% endblock body %}
+</body>
+</html>
+
