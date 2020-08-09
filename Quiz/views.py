@@ -21,9 +21,7 @@ class QuizTest(View):
         Quizes=Quiz.objects.all()
         Answer=Quiz.objects.filter(Title=request.POST.get("Title"))
         for temp in Answer:
-            print(temp.q_id)
             Your_answer.append(request.POST.get(str(temp.q_id)))
-            print(Your_answer)
             if request.POST.get(str(temp.q_id)) == None :
                 unanswer=unanswer+1
             else:
